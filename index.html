@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Disk Scheduling Visualizer - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient-bg">
+
+<!-- Navbar with Logo and Website Name -->
+<nav class="navbar navbar-expand-lg gradient-bg">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="logo.jpg" alt="DiskFlow Logo" style="height: 40px; margin-right: 10px;">
+      <span class="fw-bold text-white">DiskFlow</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Main Header -->
+<div class="container text-center my-4">
+  <h1 class="fw-bold text-white display-3 glow-text">
+    Disk Scheduling Visualizer - Dashboard
+  </h1>
+</div>
+
+<div class="container">
+  <div class="card p-4 mb-4 gradient-bg text-white">
+    <div class="row g-3 align-items-end">
+      <!-- Form Elements -->
+      <div class="col-md-3">
+        <label for="head" class="form-label glow-text-sm">Initial Head Position</label>
+        <input type="number" class="form-control" id="head" value="50" />
+      </div>
+      <div class="col-md-4">
+        <label for="requests" class="form-label glow-text-sm">Requests (comma-separated)</label>
+        <input type="text" class="form-control" id="requests" value="98,183,37,122,14,124,65,67" />
+      </div>
+      <div class="col-md-3">
+        <label for="algorithm" class="form-label glow-text-sm">Select Algorithm</label>
+        <select class="form-select" id="algorithm">
+          <option value="sstf">SSTF</option>
+          <option value="cscan">C-SCAN</option>
+          <option value="scan">SCAN</option>
+          <option value="look">LOOK</option>
+        </select>
+      </div>
+      <div class="col-md-2 d-grid">
+        <button class="btn btn-primary" id="simulateBtn">Simulate</button>
+      </div>
+    </div>
+    <button class="btn btn-danger btn-clear mt-3" id="clearBtn">Clear Dashboard</button>
+    <button class="btn btn-info btn-compare mt-1" id="compareBtn">Show Comparison</button>
+  </div>
+
+  <div id="dashboard"></div>
+</div>
+
+<!-- Comparison Modal -->
+<div class="modal fade" id="comparisonModal" tabindex="-1" aria-labelledby="comparisonModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header gradient-bg text-white">
+        <h5 class="modal-title glow-text" id="comparisonModalLabel">Algorithms Comparison</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex flex-column flex-lg-row gap-3">
+        <div class="flex-fill">
+          <canvas id="comparisonChart"></canvas>
+        </div>
+        <div class="flex-fill">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Total Seek Time</th>
+                <th>Sequence Length</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
